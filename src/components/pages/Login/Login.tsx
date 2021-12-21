@@ -65,7 +65,7 @@ export function LoginView() {
                 .then(response => {
                     if (response.status >= 200 && response.status < 300) {
                         state.responseTitle = `Nicee!`;
-                        state.responseMessage = `Aww yeah, you successfully logged in! Be welcome back :)`;
+                        state.responseMessage = `Aww yeah, you successfully logged in! Welcome back :)`;
                         state.success = true;
                         handleModal();
                         window.sessionStorage.setItem("login", response.data.data.login);
@@ -74,17 +74,24 @@ export function LoginView() {
                         window.sessionStorage.setItem("userId", response.data.data.userId);
                         window.sessionStorage.setItem("expirationTime", response.data.data.expirationTime);
                         window.sessionStorage.setItem("token", response.data.data.token);
+                        setValidated(true);
                     }
                 }).catch(response => {
-                    if (response.response.status >= 400) {
+                    if (response.response !== undefined && response.response.status >= 400) {
                         state.responseTitle = `Ooops! We got an error.`;
                         state.responseMessage = `${response.response.data.message}`;
+                        setValidated(false);
                         handleModal();
+                    } else {
+                        state.responseTitle = `Ooops! We got an error.`
+                        state.responseMessage = `Apparently we can't contact our services! Please contact an administrator!`
+                        setValidated(false);
+                        handleModal()
                     }
                 });
         }
 
-        setValidated(true);
+
 
     }
 
