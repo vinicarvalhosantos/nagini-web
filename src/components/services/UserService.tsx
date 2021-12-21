@@ -18,7 +18,7 @@ export class UserService {
 
         const path = `${process.env.REACT_APP_BASE_URL}/v1/user/register`;
 
-        return await axios.post(path, UserEntity)
+        return await axios.post(path, UserEntity);
 
     }
 
@@ -32,7 +32,15 @@ export class UserService {
 
         const path = `${process.env.REACT_APP_BASE_URL}/v1/user/login`;
 
-        return await axios.post(path, LoginEntity)
+        return await axios.post(path, LoginEntity);
+
+    }
+
+    confirmAccount = async (token: string | undefined) => {
+
+        const path = `${process.env.REACT_APP_BASE_URL}/v1/user/confirm/${token}`;
+
+        return await axios.patch(path);
 
     }
 

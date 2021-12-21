@@ -8,6 +8,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import MyNavbar from "./components/MyNavbar";
 import RegisterView from "./components/pages/Register/RegisterView";
 import LoginView from "./components/pages/Login/Login";
+import ConfirmEmail from "./components/pages/ConfirmEmail/ConfirmEmail";
 
 ReactDOM.render(
     <BrowserRouter>
@@ -16,6 +17,7 @@ ReactDOM.render(
             <Route path="/" element={<App/>}/>
             <Route path="/register" element={<RegisterView/>}/>
             <Route path="/login" element={<LoginView/>}/>
+            <Route path="/confirm-account/:token" element={<ConfirmEmail/>}/>
         </Routes>
     </BrowserRouter>,
     document.getElementById('root')

@@ -68,9 +68,13 @@ export function RegisterView() {
                         handleModal()
                     }
                 }).catch(response => {
-                    if (response.response.status >= 400) {
+                    if (response.response !== undefined && response.response.status >= 400) {
                         state.responseTitle = `Ooops! We got an error.`
-                        state.responseMessage = `${response.response.data.message}\nIf you think that it is not an error, plese contact an administrator!`
+                        state.responseMessage = `${response.response.data.message}\nIf you think that it is not an error, please contact an administrator!`
+                        handleModal()
+                    }else{
+                        state.responseTitle = `Ooops! We got an error.`
+                        state.responseMessage = `Apparently we can't contact our services! Please contact an administrator!`
                         handleModal()
                     }
                 });
