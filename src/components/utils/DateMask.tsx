@@ -1,4 +1,4 @@
-const formatDate = (value: string) => {
+const dateMask = (value: string) => {
     return value
         .replace(/\D/g, '')
         .replace(/(\d{2})(\d)/, '$1/$2')
@@ -6,4 +6,4 @@ const formatDate = (value: string) => {
         .replace(/(-\d{2})\d+$/, '$1');
 }
 
-export default formatDate;
+export default dateMask;

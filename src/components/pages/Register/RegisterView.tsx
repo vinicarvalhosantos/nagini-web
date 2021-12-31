@@ -3,7 +3,7 @@ import {Button, Card, Col, Container, Form, Modal, Row, Spinner} from "react-boo
 import "../Main.css"
 import cpfCnpjMask from "../../utils/CpfCnpjMask";
 import phoneNumberMask from "../../utils/PhoneNumberMask";
-import formatDate from "../../utils/DateMask";
+import dateMask from "../../utils/DateMask";
 import {UserService} from "../../services/UserService";
 
 export function RegisterView() {
@@ -16,6 +16,7 @@ export function RegisterView() {
         Birthday: "",
         PhoneNumber: "",
         Password: "",
+        PasswordConfirmation: "",
         modal: false,
         responseMessage: "",
         responseTitle: "",
@@ -71,12 +72,12 @@ export function RegisterView() {
                     if (response.response !== undefined && response.response.status >= 400) {
                         state.responseTitle = `Ooops! We got an error.`
                         state.responseMessage = `${response.response.data.message}\nIf you think that it is not an error, please contact an administrator!`
-                        handleModal()
-                    }else{
+
+                    } else {
                         state.responseTitle = `Ooops! We got an error.`
                         state.responseMessage = `Apparently we can't contact our services! Please contact an administrator!`
-                        handleModal()
                     }
+                    handleModal()
                 });
         }
 
@@ -171,7 +172,7 @@ export function RegisterView() {
                                 <Form.Group as={Col} controlId="formBirthday">
                                     <Form.Label>Birth Date:</Form.Label>
                                     <Form.Control name="Birthday" maxLength={10}
-                                                  value={formatDate(state.Birthday)}
+                                                  value={dateMask(state.Birthday)}
                                                   onChange={e => handleChange(e)}
                                                   placeholder="Birth Date (dd/mm/yyyy)"
                                                   isInvalid={state.Birthday !== "" && state.Birthday.length < 10}/>
@@ -199,6 +200,18 @@ export function RegisterView() {
                                               isInvalid={state.Password !== "" && state.Password.length < 8}/>
                                 <Form.Control.Feedback type="invalid">
                                     Please provide a valid password.
+                                </Form.Control.Feedback>
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formPasswordConfirmation">
+                                <Form.Label>Confirm your Password</Form.Label>
+                                <Form.Control name="PasswordConfirmation" required type="password"
+                                              onChange={e => handleChange(e)}
+                                              placeholder="Confirm your Password"
+                                              isInvalid={state.PasswordConfirmation !== "" && state.Password !== ""
+                                              && state.Password !== state.PasswordConfirmation}/>
+                                <Form.Control.Feedback type="invalid">
+                                    The Password does not match.
                                 </Form.Control.Feedback>
                             </Form.Group>
 

@@ -18,7 +18,7 @@ export class UserService {
 
         const path = `${process.env.REACT_APP_BASE_URL}/v1/user/register`;
 
-        return await axios.post(path, UserEntity);
+        return axios.post(path, UserEntity);
 
     }
 
@@ -32,7 +32,7 @@ export class UserService {
 
         const path = `${process.env.REACT_APP_BASE_URL}/v1/user/login`;
 
-        return await axios.post(path, LoginEntity);
+        return axios.post(path, LoginEntity);
 
     }
 
@@ -40,7 +40,23 @@ export class UserService {
 
         const path = `${process.env.REACT_APP_BASE_URL}/v1/user/confirm/${token}`;
 
-        return await axios.patch(path);
+        return axios.patch(path);
+
+    }
+
+    recoverPassword = async (cpfCnpj: string) =>{
+
+        const path = `${process.env.REACT_APP_BASE_URL}/v1/user/recovery-password`;
+
+        return axios.patch(path, {cpfCnpj: cpfCnpj});
+
+    }
+
+    changePassword = async (token: string | undefined, newPassword: string | undefined) => {
+
+        const path = `${process.env.REACT_APP_BASE_URL}/v1/user/change-password/${token}`;
+
+        return axios.patch(path, {NewPassword: newPassword});
 
     }
 

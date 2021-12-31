@@ -9,6 +9,8 @@ import MyNavbar from "./components/MyNavbar";
 import RegisterView from "./components/pages/Register/RegisterView";
 import LoginView from "./components/pages/Login/Login";
 import ConfirmEmail from "./components/pages/ConfirmEmail/ConfirmEmail";
+import RecoveryPasswordView from "./components/pages/RecoveryPassword/RecoveryPasswordView";
+import ChangePassword from "./components/pages/ChangePassword/ChangePasswordView";
 
 ReactDOM.render(
     <BrowserRouter>
@@ -18,6 +20,8 @@ ReactDOM.render(
             <Route path="/register" element={<RegisterView/>}/>
             <Route path="/login" element={<LoginView/>}/>
             <Route path="/confirm-account/:token" element={<ConfirmEmail/>}/>
+            <Route path="recovery-password" element={<RecoveryPasswordView/>}/>
+            <Route path="change-password/:token" element={<ChangePassword/>}/>
         </Routes>
     </BrowserRouter>,
     document.getElementById('root')
