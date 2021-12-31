@@ -13,7 +13,8 @@ export function LoginView() {
         modal: false,
         responseMessage: "",
         responseTitle: "",
-        success: false
+        success: false,
+        loading: true
     });
 
     const [validated, setValidated] = useState(false);
@@ -43,6 +44,7 @@ export function LoginView() {
     }
 
     const handleLogin = async (e: any) => {
+        state.loading = false;
         const form = e.currentTarget;
         if (form.checkValidity() === false) {
             e.preventDefault();
@@ -74,6 +76,7 @@ export function LoginView() {
                         window.sessionStorage.setItem("userId", response.data.data.userId);
                         window.sessionStorage.setItem("expirationTime", response.data.data.expirationTime);
                         window.sessionStorage.setItem("token", response.data.data.token);
+                        state.loading = true;
                         setValidated(true);
                     }
                 }).catch(response => {
@@ -81,16 +84,17 @@ export function LoginView() {
                         state.responseTitle = `Ooops! We got an error.`;
                         state.responseMessage = `${response.response.data.message}`;
                         setValidated(false);
+                        state.loading = true;
                         handleModal();
                     } else {
                         state.responseTitle = `Ooops! We got an error.`
                         state.responseMessage = `Apparently we can't contact our services! Please contact an administrator!`
                         setValidated(false);
+                        state.loading = true;
                         handleModal()
                     }
                 });
         }
-
 
 
     }
@@ -98,9 +102,7 @@ export function LoginView() {
     return (
         <Container>
 
-            <Spinner animation="border" hidden role="status">
-                <span className="visually-hidden">Loading...</span>
-            </Spinner>
+            <Spinner className="justify-content-center" animation="border" hidden={state.loading} role="status"/>
 
             <Modal
                 size="lg"
@@ -164,6 +166,11 @@ export function LoginView() {
                                 Login
                             </Button>
 
+                            <br/>
+                            <br/>
+                            <Form.Text className="text-muted">
+                                Dont have an account yet? <a href="/register">Create one now</a>
+                            </Form.Text>
 
                         </Form>
 
