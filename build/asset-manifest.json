@@ -1,11 +1,12 @@
 {
   "files": {
     "main.css": "/static/css/main.683d3901.css",
-    "main.js": "/static/js/main.a07c1ccd.js",
+    "main.js": "/static/js/main.fc980bcc.js",
+    "static/media/buckbeak.png": "/static/media/buckbeak.fe827dbd1e68c833e650.png",
     "index.html": "/index.html"
   },
   "entrypoints": [
     "static/css/main.683d3901.css",
-    "static/js/main.a07c1ccd.js"
+    "static/js/main.fc980bcc.js"
   ]
 }
